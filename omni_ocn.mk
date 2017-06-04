@@ -19,3 +19,7 @@
 
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/omni/config/common.mk)
+
+PRODUCT_NAME := omni_ocn
+PRODUCT_BRAND := htc
+PRODUCT_DEVICE := ocn
