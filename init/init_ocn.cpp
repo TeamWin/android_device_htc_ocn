@@ -62,7 +62,7 @@ void vendor_load_properties()
     } else if (strstr(bootmid, "2PZC30000")) {
         /* Asia / EMEA (Dual SIM) - OCN_DUGL */
         property_set("ro.build.product", "htc_ocndugl");
-        property_set("ro.product.model", "HTC U11");
+        property_set("ro.product.model", "HTC_U-3u");
     } else if (strstr(bootmid, "2PZC40000")) {
         /* China (Dual SIM) - OCN_DTWL */
         property_set("ro.build.product", "htc_ocndtwl");

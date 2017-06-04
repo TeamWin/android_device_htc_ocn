@@ -1,0 +1,4 @@
+# System props for HTC U11
+
+# Enable configfs
+sys.usb.configfs=1
