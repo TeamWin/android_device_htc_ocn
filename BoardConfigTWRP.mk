@@ -1,5 +1,34 @@
+# HTC U11 Device variant information - provided by Kisakuku and posted in 5m4r7ph0n36uru's XDA thread: https://goo.gl/8xvVuO
+#
+# Asia / EMEA (Single SIM for carriers and HTC direct sales)
+# Device ID: htc_ocnuhl
+# MID: 2PZC10000
+# CID: HTC__001, HTC__M27, HTC__002, HTC__034, HTC__J15, HTC__A07, ORANG001, VODAP001, H3G__003
+#
+# Japan (Single SIM)
+# Device ID: htc_ocnuhljapan
+# MID: 2PZC20000
+# CID: SBM__802
+#
+# Asia / EMEA (Dual SIM for HTC direct sales)
+# Device ID: htc_ocndugl
+# MID: 2PZC30000
+# CID: HTC__001, HTC__M27, HTC__002, HTC__034, HTC__J15, HTC__A07, HTC__621, HTC__060
+#
+# China (Dual SIM)
+# Device ID: htc_ocndtwl
+# MID: 2PZC40000
+# CID: HTCCN701
+#
+# North America (Single SIM US Unlocked, Sprint)
+# Device ID: htc_ocnwhl
+# MID: 2PZC50000
+# CID: BS_US001, SPCS_001
+#
+
 # Vendor Init
-TARGET_INIT_VENDOR_LIB := libinit_ocn
+BOARD_VENDOR := htc
+TARGET_INIT_VENDOR_LIB := libinit_$(TARGET_DEVICE)
 TARGET_UNIFIED_DEVICE := true
 
 # TWRP Build Flags
