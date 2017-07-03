@@ -31,6 +31,9 @@ BOARD_VENDOR := htc
 TARGET_INIT_VENDOR_LIB := libinit_$(TARGET_DEVICE)
 TARGET_UNIFIED_DEVICE := true
 
+# Set recovery type
+RECOVERY_VARIANT := twrp
+
 # TWRP Build Flags
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
 TW_THEME := portrait_hdpi
