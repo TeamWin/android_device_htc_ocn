@@ -41,7 +41,7 @@ TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_HAS_DOWNLOAD_MODE := true
 TW_INCLUDE_CRYPTO := true
-TW_CRYPTO_USE_SYSTEM_VOLD := qseecomd
+TW_CRYPTO_USE_SYSTEM_VOLD := qseecomd v_qseecomd hwsvcmngr keymaster3
 TW_INCLUDE_NTFS_3G := true
 TW_NO_EXFAT_FUSE := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
@@ -57,4 +57,6 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 #TARGET_RECOVERY_DEVICE_MODULES += twrpdec
 #TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_RECOVERY_ROOT_OUT)/sbin/twrpdec
 #TW_CRYPTO_SYSTEM_VOLD_DEBUG := true
-#TW_CRYPTO_SYSTEM_VOLD_DISABLE_TIMEOUT := true
+
+# Additional sepolicy for hwservicemanager
+BOARD_SEPOLICY_DIRS += device/htc/ocn/sepolicy

@@ -1,0 +1,8 @@
+# Service names must be less than 16 characters in android-7.1 and below
+service sys_v_qseecomd /vendor/bin/qseecomd
+    user root
+    group root
+    setenv PATH /vendor/bin:/system/bin
+    setenv LD_LIBRARY_PATH /vendor/lib64:/system/lib64:/vendor/lib:/system/lib
+    disabled
+    oneshot

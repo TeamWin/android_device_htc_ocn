@@ -1,0 +1,8 @@
+service sys_keymaster3 /vendor/bin/hw/android.hardware.keymaster@3.0-service
+    user root
+    group root
+    setenv PATH /vendor/bin:/system/bin
+    setenv LD_LIBRARY_PATH /vendor/lib64:/system/lib64:/vendor/lib:/system/lib
+    disabled
+    oneshot
+    seclabel u:r:vold:s0
