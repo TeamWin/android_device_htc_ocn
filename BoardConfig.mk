@@ -23,7 +23,7 @@ TARGET_NO_BOOTLOADER := true
 -include $(QCPATH)/common/msm8998/BoardConfigVendor.mk
 
 TARGET_USERIMAGES_USE_EXT4 := true
-#TARGET_USERIMAGES_USE_F2FS := true
+TARGET_USERIMAGES_USE_F2FS := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 4269801472
@@ -42,7 +42,7 @@ BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --second_offset 0x00f00000 --tags_offset 0x00000100 --board recovery:0
 
-TARGET_PREBUILT_KERNEL := device/htc/ocn/kernel
+TARGET_PREBUILT_KERNEL := device/htc/$(TARGET_DEVICE)/kernel
 
 #TARGET_PLATFORM_DEVICE_BASE := /devices/soc/
 
@@ -53,6 +53,6 @@ TARGET_HW_DISK_ENCRYPTION := true
 
 # TARGET_COMPILE_WITH_MSM_KERNEL := true
 
--include device/htc/ocn/BoardConfigTWRP.mk
--include vendor/htc/ocn/BoardConfigVendor.mk
+-include device/htc/$(TARGET_DEVICE)/BoardConfigTWRP.mk
+-include vendor/htc/$(TARGET_DEVICE)/BoardConfigVendor.mk
 
