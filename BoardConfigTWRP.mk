@@ -44,7 +44,7 @@ TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_HAS_DOWNLOAD_MODE := true
 TW_INCLUDE_CRYPTO := true
 TW_CRYPTO_USE_SYSTEM_VOLD := qseecomd hwservicemanager keymaster-3-0
-#TW_INCLUDE_NTFS_3G := true
+TW_INCLUDE_NTFS_3G := true
 TW_NO_EXFAT_FUSE := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 TARGET_RECOVERY_DEVICE_MODULES := chargeled
@@ -61,4 +61,4 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 #TW_CRYPTO_SYSTEM_VOLD_DEBUG := true
 
 # Additional sepolicy for hwservicemanager
-BOARD_SEPOLICY_DIRS += device/htc/ocn/sepolicy
+BOARD_SEPOLICY_DIRS += device/htc/$(TARGET_DEVICE)/sepolicy

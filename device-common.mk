@@ -25,7 +25,7 @@ PRODUCT_SHIPPING_API_LEVEL := 25
 #    $(LOCAL_KERNEL):kernel
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
-$(call inherit-product, device/htc/ocn/common/common64.mk)
+$(call inherit-product, device/htc/$(TARGET_DEVICE)/common/common64.mk)
 
 # For android_filesystem_config.h
 PRODUCT_PACKAGES += fs_config_files \

@@ -17,5 +17,5 @@
 #
 # Everything in this directory will become public
 
--include device/htc/ocn/device-common.mk
+-include device/htc/$(TARGET_DEVICE)/device-common.mk
 
