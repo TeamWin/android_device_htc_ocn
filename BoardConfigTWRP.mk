@@ -47,8 +47,9 @@ TW_CRYPTO_USE_SYSTEM_VOLD := qseecomd hwservicemanager keymaster-3-0
 TW_INCLUDE_NTFS_3G := true
 TW_NO_EXFAT_FUSE := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
-TARGET_RECOVERY_DEVICE_MODULES := chargeled
+TARGET_RECOVERY_DEVICE_MODULES := chargeled tzdata
 TW_INPUT_BLACKLIST := "hbtp_vm"
+TW_RECOVERY_ADDITIONAL_RELINK_FILES := $(OUT)/system/usr/share/zoneinfo/tzdata
 
 # TWRP Debug Flags
 #TWRP_EVENT_LOGGING := true

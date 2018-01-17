@@ -1,7 +1,3 @@
-# Time Zone data for Recovery
-PRODUCT_COPY_FILES += \
-    bionic/libc/zoneinfo/tzdata:recovery/root/system/usr/share/zoneinfo/tzdata
-
 $(call inherit-product, device/htc/ocn/aosp_ocn.mk)
 
 #PRODUCT_NAME := twrp_ocn
