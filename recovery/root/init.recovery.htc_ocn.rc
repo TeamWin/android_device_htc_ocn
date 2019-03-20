@@ -1,4 +1,12 @@
+import /init.recovery.qcom_decrypt.rc
+
 on init
+    export LD_CONFIG_FILE /sbin/ld.config.txt
+
+on fs
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+
     # Load Tuxera exfat module
     insmod /system/lib/modules/texfat.ko
 
@@ -17,4 +25,3 @@ service detect_key /sbin/detect_key
 service offmode_charging /sbin/offmode_charging
     disabled
     seclabel u:r:healthd:s0
-

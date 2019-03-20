@@ -16,7 +16,7 @@ TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := krait
+TARGET_2ND_CPU_VARIANT := kryo
 
 TARGET_NO_BOOTLOADER := true
 
@@ -42,7 +42,7 @@ BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --second_offset 0x00f00000 --tags_offset 0x00000100 --board recovery:0
 
-TARGET_PREBUILT_KERNEL := device/htc/$(TARGET_DEVICE)/kernel
+TARGET_PREBUILT_KERNEL := device/htc/ocn/prebuilt/Image.lz4-dtb
 
 #TARGET_PLATFORM_DEVICE_BASE := /devices/soc/
 
@@ -53,6 +53,6 @@ TARGET_HW_DISK_ENCRYPTION := true
 
 # TARGET_COMPILE_WITH_MSM_KERNEL := true
 
--include device/htc/$(TARGET_DEVICE)/BoardConfigTWRP.mk
--include vendor/htc/$(TARGET_DEVICE)/BoardConfigVendor.mk
+-include device/htc/ocn/BoardConfigTWRP.mk
+-include vendor/htc/ocn/BoardConfigVendor.mk
 

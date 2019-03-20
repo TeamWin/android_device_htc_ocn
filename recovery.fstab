@@ -14,4 +14,5 @@
 
 # Removable storage
 /external_sd		vfat	/dev/block/mmcblk0p1			/dev/block/mmcblk0	flags=storage;wipeingui;removable;encryptable=footer
+/sd_ext			ext4	/dev/block/mmcblk0p2			/dev/block/mmcblk0	flags=storage;wipeingui;removable;encryptable=footer
 /usb_otg		vfat	/dev/block/sdg1				/dev/block/sdg		flags=storage;wipeingui;removable
