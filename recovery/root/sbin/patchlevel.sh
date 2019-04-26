@@ -6,6 +6,7 @@ TEMPSYS=/s
 BUILDPROP=build.prop
 DEFAULTPROP=prop.default
 syspath="/dev/block/bootdevice/by-name/system"
+venbin="/vendor/bin"
 
 log_info()
 {
@@ -15,6 +16,38 @@ log_info()
 log_error()
 {
 	echo "E:$SCRIPTNAME:$1" >> "$LOGFILE"
+}
+
+temp_mount()
+{
+	mkdir "$1"
+	if [ -d "$1" ]; then
+		log_info "Temporary $2 folder created at $1."
+	else
+		log_error "Unable to create temporary $2 folder."
+		finish_error
+	fi
+	mount -t ext4 -o ro "$3" "$1"
+	if [ -n "$(ls -A "$1" 2>/dev/null)" ]; then
+		log_info "$2 mounted at $1."
+	else
+		log_error "Unable to mount $2 to temporary folder."
+		finish_error
+	fi
+}
+
+relink()
+{
+	log_info "Looking for $1 to update linker path..."
+	if [ -f "$1" ]; then
+		fname=$(basename "$1")
+		target="/sbin/$fname"
+		log_info "File found! Relinking $1 to $target..."
+		sed 's|/system/bin/linker64|///////sbin/linker64|' "$1" > "$target"
+		chmod 755 "$target"
+	else
+		log_info "File not found. Proceeding without relinking..."
+	fi
 }
 
 finish()
@@ -44,21 +77,10 @@ fingerprint=$(getprop ro.build.fingerprint)
 product=$(getprop ro.build.product)
 
 log_info "Running patchlevel pre-decrypt script for TWRP..."
+relink "$venbin/qseecomd"
+relink "$venbin/hw/android.hardware.keymaster@3.0-service"
 
-mkdir "$TEMPSYS"
-if [ -d "$TEMPSYS" ]; then
-	log_info "Temporary system folder created at $TEMPSYS."
-else
-	log_error "Unable to create temporary system folder."
-	finish_error
-fi
-mount -t ext4 -o ro "$syspath" "$TEMPSYS"
-if [ -n "$(ls -A "$TEMPSYS" 2>/dev/null)" ]; then
-	log_info "System mounted at $TEMPSYS."
-else
-	log_error "Unable to mount system to temporary folder."
-	finish_error
-fi
+temp_mount "$TEMPSYS" "system" "$syspath"
 
 if [ -f "$TEMPSYS/$BUILDPROP" ]; then
 	log_info "Build.prop exists! Setting system properties from build.prop"

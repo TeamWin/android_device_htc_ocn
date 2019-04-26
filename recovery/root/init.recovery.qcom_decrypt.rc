@@ -1,4 +1,4 @@
-on early-init
+on init
     wait /dev/block/bootdevice
     start patchlevel
 
@@ -7,7 +7,6 @@ on property:fde.ready=1
 
 on property:init.svc.sbinqseecomd=running && property:sys.listeners.registered=true
     start sbinhwservicemanager
-    start sbinservicemanager
 
 on fs
     # needed to make qseecomd work in recovery
@@ -23,7 +22,6 @@ on property:ro.crypto.fs_crypto_blkdev=*
     setprop fde.ready 0
     stop sbinqseecomd
     stop sbinhwservicemanager
-    stop sbinservicemanager
     stop sbinkeymaster-3-0
 
 service patchlevel /sbin/patchlevel.sh
@@ -42,12 +40,6 @@ service sbinqseecomd /sbin/qseecomd
     seclabel u:r:recovery:s0
 
 service sbinhwservicemanager /sbin/hwservicemanager
-    user root
-    group root
-    disabled
-    seclabel u:r:recovery:s0
-
-service sbinservicemanager /sbin/servicemanager
     user root
     group root
     disabled
