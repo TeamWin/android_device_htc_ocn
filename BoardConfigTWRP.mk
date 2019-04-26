@@ -44,8 +44,8 @@ TW_CRYPTO_USE_SYSTEM_VOLD := hwservicemanager servicemanager qseecomd keymaster-
 TW_INCLUDE_NTFS_3G := true
 TW_NO_EXFAT_FUSE := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
-TARGET_RECOVERY_DEVICE_MODULES := chargeled tzdata hwservicemanager servicemanager android.hidl.base@1.0
-TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_OUT)/usr/share/zoneinfo/tzdata $(TARGET_OUT)/bin/hwservicemanager $(TARGET_OUT)/bin/servicemanager $(TARGET_OUT)/lib64/android.hidl.base@1.0.so
+TARGET_RECOVERY_DEVICE_MODULES := chargeled tzdata hwservicemanager android.hidl.base@1.0 # servicemanager
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_OUT)/usr/share/zoneinfo/tzdata $(TARGET_OUT)/bin/hwservicemanager $(TARGET_OUT)/lib64/android.hidl.base@1.0.so # $(TARGET_OUT)/bin/servicemanager
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 
