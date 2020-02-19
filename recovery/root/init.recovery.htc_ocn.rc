@@ -1,8 +1,5 @@
 import /init.recovery.qcom_decrypt.rc
 
-on init
-    export LD_CONFIG_FILE /sbin/ld.config.txt
-
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice

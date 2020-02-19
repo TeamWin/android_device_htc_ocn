@@ -17,8 +17,8 @@
 # Sample: This is where we'd set a backup provider if we had one
 # $(call inherit-product, device/sample/products/backup_overlay.mk)
 
-# Inherit TWRP device configuration
-$(call inherit-product-if-exists, device/htc/ocn/twrp_ocn.mk)
+# Inherit from the common Open Source product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
 # Inherit some common Lineage stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
@@ -26,3 +26,6 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 PRODUCT_NAME := lineage_ocn
 PRODUCT_BRAND := htc
 PRODUCT_DEVICE := ocn
+PRODUCT_MODEL := HTC U11
+PRODUCT_MANUFACTURER := HTC
+
