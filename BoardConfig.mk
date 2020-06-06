@@ -72,8 +72,8 @@ TARGET_HW_DISK_ENCRYPTION := true
 
 # Custom Platform Version and Security Patch
 # TWRP Defaults
-PLATFORM_VERSION := 16.1.0
-PLATFORM_SECURITY_PATCH := 2025-12-01
+PLATFORM_VERSION := 20.1.0
+PLATFORM_SECURITY_PATCH := 2099-12-31
 
 # TWRP Build Flags
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
