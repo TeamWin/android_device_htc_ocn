@@ -17,15 +17,10 @@
 # Sample: This is where we'd set a backup provider if we had one
 # $(call inherit-product, device/sample/products/backup_overlay.mk)
 
-# Inherit from our custom product configuration
-$(call inherit-product, vendor/omni/config/common.mk)
+# Inherit from the common Open Source product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/embedded.mk)
 
-## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := ocn
-PRODUCT_NAME := omni_$(PRODUCT_DEVICE)
-PRODUCT_BRAND := htc
-PRODUCT_MODEL := $(shell echo $(PRODUCT_BRAND) | tr  '[:lower:]' '[:upper:]') U11
-PRODUCT_MANUFACTURER := $(shell echo $(PRODUCT_BRAND) | tr  '[:lower:]' '[:upper:]')
-
-# Inherit from the common device configuration
-$(call inherit-product, device/$(PRODUCT_BRAND)/$(PRODUCT_DEVICE)/device.mk)
+PRODUCT_PACKAGES += \
+    chargeled \
+    qcom_decrypt \
+    tzdata_twrp

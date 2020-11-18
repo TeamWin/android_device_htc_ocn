@@ -33,7 +33,10 @@
 # Board
 BOARD_VENDOR := htc
 TARGET_BOARD_PLATFORM := msm8998
-TARGET_BOOTLOADER_BOARD_NAME := MSM8998
+TARGET_BOOTLOADER_BOARD_NAME := $(shell echo $(TARGET_BOARD_PLATFORM) | tr  '[:lower:]' '[:upper:]')
+
+# Default device path
+LOCAL_PATH := device/$(BOARD_VENDOR)/$(TARGET_DEVICE)
 
 # Architecture
 TARGET_ARCH := arm64
@@ -46,7 +49,7 @@ TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := kryo
+TARGET_2ND_CPU_VARIANT := $(TARGET_CPU_VARIANT)
 
 # Bootloader
 TARGET_NO_BOOTLOADER := true
@@ -61,18 +64,39 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 58476986368
 BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200,n8 androidboot.console=ttyMSM0 user_debug=31 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 swiotlb=2048 androidboot.configfs=true androidboot.usbcontroller=a800000.dwc3 androidboot.hardware=htc_ocn androidkey.dummy=1 buildvariant=eng androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE     := \
+    androidboot.configfs=true \
+    androidboot.console=ttyMSM0 \
+    androidboot.hardware=htc_ocn \
+    androidboot.selinux=permissive \
+    androidboot.usbcontroller=a800000.dwc3 \
+    androidkey.dummy=1 \
+    console=ttyMSM0,115200,n8 \
+    ehci-hcd.park=3 \
+    lpm_levels.sleep_disabled=1 \
+    sched_enable_hmp=1 \
+    sched_enable_power_aware=1 \
+    service_locator.enable=1 \
+    swiotlb=2048 \
+    user_debug=31 \
 BOARD_KERNEL_BASE        := 0x00000000
+BOARD_KERNEL_IMAGE_NAME  := Image.lz4-dtb
 BOARD_KERNEL_PAGESIZE    := 4096
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --second_offset 0x00f00000 --tags_offset 0x00000100 --board recovery:0
-TARGET_PREBUILT_KERNEL := device/$(BOARD_VENDOR)/$(TARGET_DEVICE)/prebuilt/Image.lz4-dtb
+BOARD_MKBOOTIMG_ARGS     := \
+    --kernel_offset 0x00008000 \
+    --ramdisk_offset 0x01000000 \
+    --second_offset 0x00f00000 \
+    --tags_offset 0x00000100 \
+    --board recovery:0
+TARGET_PREBUILT_KERNEL   := $(LOCAL_PATH)/prebuilt/$(BOARD_KERNEL_IMAGE_NAME)
 
 # Enable HW based full disk encryption
 TARGET_HW_DISK_ENCRYPTION := true
+BOARD_USES_QCOM_DECRYPTION := true
 
 # Custom Platform Version and Security Patch
 # TWRP Defaults
-PLATFORM_VERSION := 20.1.0
+PLATFORM_VERSION := 16.1.0
 PLATFORM_SECURITY_PATCH := 2099-12-31
 
 # TWRP Build Flags
@@ -82,24 +106,30 @@ TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 178
 TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_EXCLUDE_TWRPAPP := true
 TW_HAS_DOWNLOAD_MODE := true
 TW_INCLUDE_CRYPTO := true
-TW_CRYPTO_USE_SYSTEM_VOLD := hwservicemanager servicemanager qseecomd keymaster-3-0
+TW_INCLUDE_RESETPROP := true
+TW_CRYPTO_USE_SYSTEM_VOLD := \
+    hwservicemanager \
+    keymaster-3-0 \
+    qseecomd \
+    servicemanager
 TW_INCLUDE_NTFS_3G := true
 TW_NO_EXFAT_FUSE := true
 TW_OVERRIDE_SYSTEM_PROPS := "ro.build.fingerprint"
 TARGET_RECOVERY_QCOM_RTC_FIX := true
-TARGET_RECOVERY_DEVICE_MODULES := chargeled tzdata android.hidl.base@1.0
-TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_OUT)/usr/share/zoneinfo/tzdata $(TARGET_OUT)/lib64/android.hidl.base@1.0.so
+TARGET_RECOVERY_DEVICE_MODULES := android.hidl.base@1.0
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_OUT)/lib64/android.hidl.base@1.0.so
 #TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 
 # TWRP Debug Flags
 #TWRP_EVENT_LOGGING := true
-#TARGET_USES_LOGD := true
-#TWRP_INCLUDE_LOGCAT := true
-#TARGET_RECOVERY_DEVICE_MODULES += debuggerd
-#TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_OUT_EXECUTABLES)/debuggerd
+TARGET_USES_LOGD := true
+TWRP_INCLUDE_LOGCAT := true
+TARGET_RECOVERY_DEVICE_MODULES += debuggerd
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_OUT_EXECUTABLES)/debuggerd
 #TARGET_RECOVERY_DEVICE_MODULES += strace
 #TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_OUT_OPTIONAL_EXECUTABLES)/strace
 #TARGET_RECOVERY_DEVICE_MODULES += twrpdec
@@ -108,4 +138,3 @@ TW_USE_TOOLBOX := true
 
 # Vendor Init
 TARGET_INIT_VENDOR_LIB := libinit_$(TARGET_DEVICE)
-
