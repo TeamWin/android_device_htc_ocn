@@ -1,9 +1,6 @@
-import /init.recovery.qcom_decrypt.rc
+import /init.recovery.qcom.rc
 
 on fs
-    wait /dev/block/platform/soc/${ro.boot.bootdevice}
-    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-
     # Load Tuxera exfat module
     insmod /system/lib/modules/texfat.ko
 

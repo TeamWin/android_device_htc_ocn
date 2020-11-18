@@ -17,15 +17,15 @@
 # Sample: This is where we'd set a backup provider if we had one
 # $(call inherit-product, device/sample/products/backup_overlay.mk)
 
-# Inherit from the common Open Source product configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
-
 # Inherit some common Lineage stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-PRODUCT_NAME := lineage_ocn
-PRODUCT_BRAND := htc
+## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := ocn
-PRODUCT_MODEL := HTC U11
-PRODUCT_MANUFACTURER := HTC
+PRODUCT_NAME := lineage_$(PRODUCT_DEVICE)
+PRODUCT_BRAND := htc
+PRODUCT_MODEL := $(shell echo $(PRODUCT_BRAND) | tr  '[:lower:]' '[:upper:]') U11
+PRODUCT_MANUFACTURER := $(shell echo $(PRODUCT_BRAND) | tr  '[:lower:]' '[:upper:]')
 
+# Inherit from the common device configuration
+$(call inherit-product, device/$(PRODUCT_BRAND)/$(PRODUCT_DEVICE)/device.mk)
